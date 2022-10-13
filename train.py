@@ -466,6 +466,8 @@ def main(**kwargs):
 
     # pretrained path
     pretrained = None
+    ctx.knowlege_length = kwargs['knowlege_length']
+    print('ctx.knowlege_length:', ctx.knowlege_length)
 
     # create the net
     net = PHAED(len(src_w2idx), len(tgt_w2idx),
@@ -522,10 +524,10 @@ def main(**kwargs):
                                             kwargs['tgt_maxlen'], ld=True)
         test_iter = get_batch_data_hier_tf(kwargs['src_test'], kwargs['tgt_test'], kwargs['src_vocab'],
                                            kwargs['tgt_vocab'], kwargs['batch_size']*4, kwargs['maxlen'],
-                                           kwargs['tgt_maxlen'], ld=True, random=False)
+                                           kwargs['tgt_maxlen'], ld=True, random=True)
         dev_iter = get_batch_data_hier_tf(kwargs['src_dev'], kwargs['tgt_dev'], kwargs['src_vocab'],
                                           kwargs['tgt_vocab'], kwargs['batch_size']*2, kwargs['maxlen'],
-                                          kwargs['tgt_maxlen'], ld=True, random=False)
+                                          kwargs['tgt_maxlen'], ld=True, random=True)
 
         print(f'Epoch {epoch}:')
  
@@ -637,12 +639,8 @@ if __name__ == "__main__":
     parser.add_argument('--num_turn_embeddings', type=int, default=50)
     parser.add_argument('--dim_feedforward', type=int, default=1024)
     parser.add_argument('--position_embed_size', type=int, default=30)
-    parser.add_argument('--train_graph', type=str, default=None, 
-                        help='train graph data path')
-    parser.add_argument('--test_graph', type=str, default=None, 
-                        help='test graph data path')
-    parser.add_argument('--dev_graph', type=str, default=None, 
-                        help='dev graph data path')
+    parser.add_argument('--knowlege_length', type=int, default=0, 
+                        help='knowlege_length') 
     
     parser.add_argument('--pred', type=str, default=None, 
                         help='the file save the output')
