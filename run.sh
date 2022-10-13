@@ -14,7 +14,7 @@ if [ ! $model ]; then
 fi
 
 if [ $dataset = 'PersonaChat' ]; then
-    knowlege_length=5
+    knowlege_length=1
 else
     knowlege_length=0
 fi
