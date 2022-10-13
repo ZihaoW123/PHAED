@@ -2,7 +2,7 @@
 
 
 ## Dataset 
-The preprocess script for these datasets can be found under `data/` folder.
+The preprocess script for these datasets can be found under `data` folder.
 1. DailyDialog dataset
 2. Ubuntu corpus
 5. PersonaChat
@@ -29,6 +29,7 @@ The preprocess script for these datasets can be found under `data/` folder.
 Three multi-turn open-domain dialogue dataset (Dailydialog, PersonaChat, UbuntuV2) 
 Dailydialog and PersonaChat can be obtained by this [link](https://github.com/ZihaoW123/PHAED/raw/main/data/data.zip)
 UbuntuV2 can be obtained by this [link](https://github.com/rkadlec/ubuntu-ranking-dataset-creator)
+The preprocess script `process.py` for these datasets can be found under `data/` folder.
 
 Each dataset contains 6 files
 * src-train.txt
@@ -39,11 +40,9 @@ Each dataset contains 6 files
 * tgt-test.txt
 
 In all the files, one line contain only one dialogue context (src) or the dialogue response (tgt).
-More details can be found in the example files.
-In order to create the graph, each sentence must begin with the 
-special tokens `<user0>` and `<user1>` which denote the speaker.
-The `__eou__` is used to separate the multiple utterances in the conversation context.
-More details can be found in the small data case.
+More details can be found in the example files. Each sentence must begin with the special tokens `<user0>` and `<user1>` which denote the speaker.
+The `__eou__` is used to separate the multiple sentences in the conversation context.
+
 
 ## How to use
 
@@ -69,7 +68,7 @@ Variable `DATASET` contains the name of the dataset that you want to process
 ```
 
 ```bash
-# example: get the vocab of DailyDialog dataset
+# get the vocab of DailyDialog dataset
 ./run.sh vocab DailyDialog
 ```
 
@@ -80,7 +79,7 @@ Variable `DATASET` contains the name of the dataset that you want to process
 ```
 
 ```bash
-# example: train the PHAED model with DailyDialog dataset on 0th GPU
+# train the PHAED model with DailyDialog dataset on 0th GPU
 ./run.sh train DailyDialog PHAED 0
 ```
 
@@ -91,7 +90,7 @@ Variable `DATASET` contains the name of the dataset that you want to process
 ```
 
 ```bash
-# example: generation the response. translate mode, dataset dialydialog, model PHAED on 0th GPU
+# generation the response. translate mode, dataset dialydialog, model PHAED on 0th GPU
 ./run.sh translate DailyDialog PHAED 0
 ```
  
@@ -103,6 +102,9 @@ Variable `DATASET` contains the name of the dataset that you want to process
 ```
  
 ```bash
-# example: get the BLEU, Distinct, embedding-based metrics result of the generated sentences on 0th GPU
+# get the BLEU, Distinct, embedding-based metrics result of the generated sentences on 0th GPU
 ./run.sh eval DailyDialog PHAED 0
 ```
+
+## Acknowledgements
+Builds on the [MutiTurnDialogZoo](https://github.com/gmftbyGMFTBY/MultiTurnDialogZoo),  [embedding_metric](https://github.com/lipiji/dialogue-hred-vhred/blob/master/utils/embedding_metric.py),  and [transformer_xl](https://github.com/kimiyoung/transformer-xl)
