@@ -42,7 +42,7 @@ def train(train_iter, model, optimizer, vocab_size, pad,
     nll_loss_item = 0.0
     step_count = 0
     optimizer.zero_grad()
-    freq = 2
+    freq = 1
     for idx, batch in enumerate(pbar):
         # [batch, turn, length], [batch, seq_len, batch] / [batch, seq_len], [batch, seq_len]
         src, tbatch, lengths = batch
