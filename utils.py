@@ -379,6 +379,11 @@ def load_data_users(src, tgt, src_vocab, tgt_vocab, maxlen, tgt_maxlen, ld=True)
                 elif '<user1>' in utterance:
                     user_c, user_cr = '<user1>', 'user1'
                 utterance = utterance.replace(user_c, user_cr).strip()
+                #if ' & ' in utterance:
+                #    xs = utterance.split(' & ')
+                #    np.random.shuffle(xs)
+                #    utterance = ' '.join(xs)
+                    
                 line = [src_w2idx['<sos>']] + [src_w2idx.get(w, src_w2idx['<unk>']) for w in
                                                nltk.word_tokenize(utterance)] + [src_w2idx['<eos>']]
 
@@ -488,7 +493,7 @@ def load_data_users(src, tgt, src_vocab, tgt_vocab, maxlen, tgt_maxlen, ld=True)
             pickle.dump((tgt_dataset, tgt_user, tgt_turns_num), f, protocol=pickle.HIGHEST_PROTOCOL)
         print(f'[!] load dataset over, write into file {src_prepath} and {tgt_prepath}')
     else:
-        print('[!] VHRED or KgCVAE donot write the dataset file')
+        print('[!] donot write the dataset file')
 
     # src_user: [datasize, turn], tgt_user: [datasize]
     return src_dataset, tgt_dataset, src_user, tgt_user, src_turns_num, tgt_turns_num

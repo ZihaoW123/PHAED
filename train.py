@@ -82,7 +82,7 @@ def train(train_iter, model, optimizer, vocab_size, pad,
                     memory_pad_num = new_mask.new_zeros(new_mask.size()) + new_mask.sum(0)[None, :]
                     ctx.memory_pad_num = memory_pad_num if ctx.memory_pad_num is None else torch.cat([ctx.memory_pad_num+new_mask.sum(0)[None, :], memory_pad_num], dim=0)
     
-                    if sents_no <= n_sents - 1:
+                    if ctx.knowlege_length<=sents_no and sents_no <= n_sents - 1:
                         # loss_ = criterion(log_probs.view(-1, log_probs.size(-1)), y_label.view(-1)).view((batch_size, -1)).sum(-1)
                         words_norm += y_label.ne(pad).float().sum()
                         # loss += loss_.div(words_norm).sum()
@@ -268,7 +268,7 @@ def translate(data_iter, net, epoch=0, **kwargs):
             # teach_force over
             assert nll_loss_item != 0
             batch_num += 1
-            total_loss += nll_loss_item
+            total_loss += nll_loss_item 
 
             # ipdb.set_trace()
             for i in range(batch_size):

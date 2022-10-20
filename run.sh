@@ -14,15 +14,14 @@ if [ ! $model ]; then
 fi
 
 if [ $dataset = 'PersonaChat' ]; then
-    knowlege_length=1
+    knowlege_length=5
 else
     knowlege_length=0
 fi
 
-# maxlen and batch_size
-# for dailydialog dataset, 20 and 150 is the most appropriate settings
-maxlen=50
-tgtmaxlen=50
+# maxlen and batch_size 
+maxlen=70
+tgtmaxlen=70
 batch_size=32
 
 # ========== Ready Perfectly ========== #
