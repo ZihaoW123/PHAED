@@ -72,6 +72,8 @@ def write_file_personachat(corpus, dataset, mode):
         assert len(se) == 3
         knowledge, context, response = se
         ku = knowledge.split('__eou__') 
+        #ku = ' & '.join([i.strip() for i in ku])
+        #ku = '<user0> ' + ku
         
         ku = ['<user0> ' + i.strip() for i in ku]
         ku = ' __eou__ '.join(ku)
